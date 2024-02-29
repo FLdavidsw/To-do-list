@@ -1,0 +1,34 @@
+h1 {
+   font-size: 20px; 
+   font-weight: 600;
+}
+.folder-name {
+    font-size: 26px;
+    font-weight: 700;
+    padding: 3px 5px;
+    margin-top: 25px;
+}
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+    margin: 1px auto;
+}
+// Tablets
+@media screen and (max-width: 40em){
+    .main-container {
+        width: 90%;
+    }
+    h1 {
+        font-size: 16px; 
+        font-weight: 600;
+     }
+
+}
+
+@media screen and (min-width: 40em) and (max-width: 55.9em){
+
+}
+
+// web

@@ -1,0 +1,40 @@
+@if(!addingTask) {
+    <div class="add-cont">
+        <div class="check-button-cont">
+            <button class="add-button" (click)="changeState()">       
+                <div class="informative-cont" >
+                    <!--add SVG path label <path> -->
+                    <p class="informative">+ Add a new note...</p>
+                </div>
+            </button>
+        </div>
+    </div>
+}
+@else if (generalEditState){
+    <div class="createBlock">
+        <form [formGroup]="newTaskCtrl" (ngSubmit)="onSubmit()">
+            <div class="newNote">
+                <div>
+                    <input type="text" class="new-title new" placeholder="Task's title" formControlName="title" name="title" required pattern="\S.*">
+                </div>
+                <div>
+                    <textarea type="text" class="new-description new" placeholder="Task's description" formControlName="description"></textarea>
+                </div>
+                <div class="date-priority">
+                    <div>
+                        <input type="text" class="new-deadline new" placeholder="Today" formControlName="deadline">
+                    </div>
+                    <div>
+                        <input type="text" class="new-priority new" placeholder="Task's priority" formControlName="priority">
+                    </div>
+                </div>
+                <div class="submit-delete">
+                    <button type="button" (click)="onCancel()">Cancel</button>
+                    <button type="submit" [disabled]="!newTaskCtrl.valid">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+}
+
+

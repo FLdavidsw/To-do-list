@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+@import './styles/reset.scss';
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
+
+:root {
+    //space to add universal variables
+}
+* {
+ font-family: "Inconsolata", monospace;
+}

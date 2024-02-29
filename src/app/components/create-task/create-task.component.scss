@@ -1,0 +1,75 @@
+.add-cont {
+    margin: 1px auto;
+    margin-top: 15px;
+    padding-left: 5px;
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    .check-button-cont {
+        height: 100%;
+        width: 100%;
+    }
+    .add-button {
+        background-color: transparent;
+        border: none;
+        font-size: 20px;
+        height: 100%;
+        cursor: pointer;
+    }
+    .informative-cont {
+        margin-left: 10px;
+        padding-top: 6px;
+    }
+}
+.add-cont:hover {
+    transform: scale(1.01);
+    color: rgb(0, 183, 255);
+    .add-button {
+        color: blue;
+    }
+}
+.newNote {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 8px;
+    row-gap: 5px;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    padding: 6px 7px;
+    box-sizing: border-box;
+    input, textarea {
+        border: none;
+        font-size: 15px;
+        width: 100%;
+    }
+    textarea {
+        resize: none;
+        align-items: center;
+        height: 30px;
+        box-sizing: border-box;
+    }
+    .new-title {
+        font-weight: bold;
+    }
+    .date-priority {
+        display: flex;
+        flex-direction: row;
+        margin-top: 3px;
+    }
+    .submit-delete {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 40px;
+        align-items: end;
+        column-gap: 3px;
+        button {
+            height: 25px;
+        }
+    }
+}
+.new:focus {
+    outline: none; /* Remove default focus outline */
+    border-color: #007bff; /* Set the border color when focused */
+}

@@ -1,0 +1,165 @@
+h1 {
+    font-size: 20px; 
+    font-weight: 600;
+}
+ .task {
+     display: flex;
+     flex-direction: row;
+     justify-content: center;
+     width: 100%;
+     margin: 1px auto;
+     box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
+     margin-top: 12px;
+     box-sizing: border-box;
+ 
+ }
+ .task:hover {
+     transform: scale(1.03);
+        .edit-button {
+            display: block;
+        }   
+ }
+ .check-button-cont {
+     flex-shrink: 3;
+     display: block;
+     width: 30px;
+     height: 30px;
+     padding: 5px 5px 0px 0;
+ 
+ }
+ .check {
+     width: 20px;
+     height: 20px;
+     display: block;
+     margin: 1px auto;
+ }
+ .task-item {
+     flex: 1;
+     display: grid;
+     grid-template-columns: repeat(2, auto);
+     grid-template-rows: repeat(3, auto);
+     grid-template-areas: 
+     "name edit" 
+     "description description"
+     "date priority";
+     row-gap: 7.5px;
+     padding: 5px 3px;
+ }
+ 
+ .task-item {
+     grid-area: name;
+ }
+ .edit-cont {
+     grid-area: edit;
+     .edit-button {
+         display: none;
+     }
+     .edit-button:hover {
+        cursor: pointer;
+     }
+ }
+ .task-description {
+     grid-area: description;
+ }
+ .deadline-cont {
+     grid-area: date;
+ }
+ .priority-count {
+     grid-area: priority;
+ }
+ .edit-cont, .priority-cont {
+     justify-self: end;
+ }
+ .add-cont {
+    margin: 1px auto;
+    margin-top: 15px;
+    padding-left: 5px;
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    .check-button-cont {
+        height: 100%;
+        width: 100%;
+    }
+    .add-button {
+        background-color: transparent;
+        border: none;
+        font-size: 20px;
+        height: 100%;
+        cursor: pointer;
+    }
+    .informative-cont {
+        margin-left: 10px;
+        padding-top: 6px;
+    }
+}
+.add-cont:hover {
+    transform: scale(1.01);
+    color: rgb(0, 183, 255);
+    .add-button {
+        color: blue;
+    }
+}
+.newNote {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 8px;
+    row-gap: 5px;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    padding: 6px 7px;
+    box-sizing: border-box;
+    input, textarea {
+        border: none;
+        font-size: 15px;
+        width: 100%;
+    }
+    textarea {
+        resize: none;
+        align-items: center;
+        height: 30px;
+        box-sizing: border-box;
+    }
+    .new-title {
+        font-weight: bold;
+    }
+    .date-priority {
+        display: flex;
+        flex-direction: row;
+        margin-top: 3px;
+    }
+    .submit-delete {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 40px;
+        align-items: end;
+        column-gap: 3px;
+        button {
+            height: 25px;
+        }
+    }
+}
+.new:focus {
+    outline: none; /* Remove default focus outline */
+    border-color: #007bff; /* Set the border color when focused */
+}
+ // Tablets
+@media screen and (max-width: 40em){
+
+    h1 {
+        font-size: 16px; 
+        font-weight: 600;
+     }
+     .task {
+        .edit-button {
+            display: block;
+        }
+     }
+
+}
+
+@media screen and (min-width: 40em) and (max-width: 55.9em){
+
+}

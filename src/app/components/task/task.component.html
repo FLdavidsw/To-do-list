@@ -1,0 +1,51 @@
+@if(!task.editState) {
+    <div class="task">
+        <div class="cont-check check-button-cont">
+            <input class="check" type="radio">
+        </div>
+        <div class="task-item">
+            <div class="title-cont">
+                <h1 class="task-title">{{task.title}}</h1>
+            </div>
+            <div class="edit-cont">
+                <button (click)="changeEditState()" class="edit-button">edit</button>
+            </div>
+            <div class="task-description">
+                <p class="description">{{task.description}}</p>
+            </div>
+            <div class="deadline-cont">
+                <p class="deadline-date date">{{task.deadline}}</p>
+            </div>
+            <div class="priority-cont">
+                <p>{{task.priority}}</p>
+            </div>
+        </div>
+    </div>
+}
+@else if (!generalEditState){
+    <div class="createBlock">
+        <form [formGroup]="editedCtrlTask" (ngSubmit)="onSubmit()">
+            <div class="newNote">
+                <div>
+                    <input type="text" class="new-title new" placeholder="Task's title"  formControlName="title" name="title" required pattern="\S.*">
+                </div>
+                <div>
+                    <textarea type="text" class="new-description new" placeholder="Task's description" formControlName="description"></textarea>
+                </div>
+                <div class="date-priority">
+                    <div>
+                        <input type="text" class="new-deadline new" placeholder="Date"  formControlName="deadline">
+                    </div>
+                    <div>
+                        <input type="text" class="new-priority new" placeholder="Task's priority"  formControlName="priority">
+                    </div>
+                </div>
+                <div class="submit-delete">
+                    <button type="button" (click)="onCancel()">Cancel</button>
+                    <button type="submit" [disabled]="!editedCtrlTask.valid">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+}
+
