@@ -1,0 +1,20 @@
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 8px;
+    height: 100vh;
+    width: 100%;
+    margin-top: 15px;
+}
+.logo-container {
+    display: flex;
+    height: 60px;
+    align-items: center;
+    padding-left: 3px;
+    text-decoration: none;
+    img {
+        height: 100%;
+    }
+}

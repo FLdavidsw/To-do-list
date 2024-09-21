@@ -1,7 +1,15 @@
-<div class="main-container">
+<div id="main-container" class="main-container">
     <h1 class="folder-name">Inbox</h1>
-    <div *ngFor="let task of myTasks" class="task">
-        <app-task [task]="task"></app-task>
+    <!--[@fadeInOut]="myTasksCopy[i].createdState ? 'open' : 'closed'"-->
+    <div 
+        attr.id="task{{i}}"
+        *ngFor="let task of myTasks; let i = index" class="task">
+            <app-task
+            attr.id="task-component{{i}}"
+            (idDelete)="onDelete($event)"
+            [task]="task"
+            [idTask]="i">
+            </app-task>
     </div>
     <app-create-task></app-create-task>
 </div>

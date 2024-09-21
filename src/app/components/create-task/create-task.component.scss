@@ -55,7 +55,12 @@
     .date-priority {
         display: flex;
         flex-direction: row;
-        margin-top: 3px;
+        input:nth-child(1){
+            width: 60px;
+        }
+        input:nth-child(2){
+            width: 150px;
+        }
     }
     .submit-delete {
         display: flex;
@@ -66,10 +71,19 @@
         column-gap: 3px;
         button {
             height: 25px;
+            border: none;
+            border-radius: 6px;
+            width: 60px;
+            padding: 5px 5px;
         }
     }
 }
 .new:focus {
     outline: none; /* Remove default focus outline */
     border-color: #007bff; /* Set the border color when focused */
+}
+
+@media screen and (max-width: 40em){
+
+
 }

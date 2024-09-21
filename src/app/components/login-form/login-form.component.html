@@ -1,0 +1,27 @@
+<form [formGroup]="loginForm" class="form-container">
+    <h1 class="title">Log-In</h1>
+    <div class="form-group">
+      <label for="LoginEmail">Email address</label>
+      <input type="email" class="form-control" id="LoginEmail" aria-describedby="emailHelp" placeholder="Enter email" formControlName="email">
+    </div>
+    <div class="form-group">
+      <label for="LoginPassword">Password</label>
+      <div class="password-input-wrapper">
+        <input type="{{ showPassword ? 'text': 'password'}}" class="form-control" id="LoginPassword" placeholder="Password" formControlName="password">
+        <span class="bi bi-eye" [ngClass]="{'bi-eye': !showPassword, 'bi-eye-slash': showPassword}" (click)="togglePasswordVisibility()"></span>
+      </div>
+      @if(status === 'failed'){
+        <p 
+          class="font-medium"
+        >
+          Credentials are invalid
+        </p>
+      }
+    </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="logIn()" [disabled]="!loginForm.valid">Submit</button>
+    <a routerLink="/user/signup">Don't you have an account? Sign up here!</a>
+  </form>

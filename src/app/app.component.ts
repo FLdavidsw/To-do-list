@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
-import { ListComponent } from './components/list/list.component';
-import { CreateTaskComponent } from './components/create-task/create-task.component';
-import { TaskComponent } from './components/task/task.component';
+import { LayoutComponent } from '@components/layout/layout.component';
 
 @Component({
     selector: 'app-root',
@@ -15,11 +13,15 @@ import { TaskComponent } from './components/task/task.component';
       [
         CommonModule, 
         RouterOutlet, 
-        ListComponent,
-        CreateTaskComponent,
-        TaskComponent
+        LayoutComponent
       ]
+      
 })
 export class AppComponent {
-  title = 'to-do-list';
+
+  constructor(
+  ){}
+
+
+
 }

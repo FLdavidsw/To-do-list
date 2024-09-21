@@ -1,5 +1,5 @@
 h1 {
-    font-size: 20px; 
+    font-size: 16px; 
     font-weight: 600;
 }
  .task {
@@ -52,7 +52,7 @@ h1 {
  .edit-cont {
      grid-area: edit;
      .edit-button {
-         display: none;
+        display: none;
      }
      .edit-button:hover {
         cursor: pointer;
@@ -128,6 +128,12 @@ h1 {
         display: flex;
         flex-direction: row;
         margin-top: 3px;
+        input:nth-child(1){
+            width: 60px;
+        }
+        input:nth-child(2){
+            width: 150px;
+        }
     }
     .submit-delete {
         display: flex;
@@ -140,6 +146,12 @@ h1 {
             height: 25px;
         }
     }
+}
+button {
+    border: none;
+    border-radius: 6px;
+    width: 60px;
+    padding: 5px 5px;
 }
 .new:focus {
     outline: none; /* Remove default focus outline */
@@ -161,5 +173,9 @@ h1 {
 }
 
 @media screen and (min-width: 40em) and (max-width: 55.9em){
-
+    .task {
+        .edit-button {
+            display: block;
+        }
+     }
 }

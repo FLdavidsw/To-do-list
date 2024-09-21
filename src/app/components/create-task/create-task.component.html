@@ -14,23 +14,15 @@
     <div class="createBlock">
         <form [formGroup]="newTaskCtrl" (ngSubmit)="onSubmit()">
             <div class="newNote">
-                <div>
-                    <input type="text" class="new-title new" placeholder="Task's title" formControlName="title" name="title" required pattern="\S.*">
-                </div>
-                <div>
-                    <textarea type="text" class="new-description new" placeholder="Task's description" formControlName="description"></textarea>
-                </div>
+                <input type="text" class="new-title new" placeholder="Task's title" formControlName="title" name="title" required pattern="\S.*">
+                <textarea type="text" class="new-description new" placeholder="Task's description" formControlName="description"></textarea>
                 <div class="date-priority">
-                    <div>
-                        <input type="text" class="new-deadline new" placeholder="Today" formControlName="deadline">
-                    </div>
-                    <div>
-                        <input type="text" class="new-priority new" placeholder="Task's priority" formControlName="priority">
-                    </div>
+                    <input type="text" class="new-deadline new" placeholder="Today" formControlName="deadline">
+                    <input type="text" class="new-priority new" placeholder="Task's priority" formControlName="priority">
                 </div>
                 <div class="submit-delete">
-                    <button type="button" (click)="onCancel()">Cancel</button>
-                    <button type="submit" [disabled]="!newTaskCtrl.valid">Submit</button>
+                    <button class="new-note-button" type="button" (click)="onCancel()">Cancel</button>
+                    <button class="new-note-button" type="submit" [disabled]="!newTaskCtrl.valid">Submit</button>
                 </div>
             </div>
         </form>

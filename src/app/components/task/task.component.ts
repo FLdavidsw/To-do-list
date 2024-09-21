@@ -1,19 +1,44 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormsModule, FormControl, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
+import { animate, style, transition, trigger, state} from '@angular/animations';
 
-import { Task, editedTask } from '../../models/task.model';
-import { CreateService } from '../../services/create-task.service';
+import { fadeOut } from '@models/animations';
+import { Task } from '@models/task.model';
+import { TaskService } from '@services/task.service';
+
+const fadeInOut = trigger('fadeInOut', [
+  state(
+    'open',
+    style({
+      opacity: 1,
+    })
+  ),
+  state(
+    'closed',
+    style({
+      opacity: 0,
+    })
+  ),
+  transition('open => closed', [animate('1s ease-out')])
+]);
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule],
   templateUrl: './task.component.html',
-  styleUrl: './task.component.scss'
+  styleUrl: './task.component.scss',
+  animations: [
+    fadeInOut,
+    fadeOut
+  ],
 })
 export class TaskComponent implements OnInit{
   @Input() task!: Task;
-  //editState: boolean = false;
+  @Input() idTask!: number;
+  @Output() idDelete = new EventEmitter<number>();
+  checkTask: boolean = false; 
   generalEditState: boolean = false;
   previousTitle!: string
   editedCtrlTask = new FormGroup({
@@ -30,29 +55,14 @@ export class TaskComponent implements OnInit{
   editedTask!: Task;
 
   constructor(
-    private createService: CreateService
+    private taskService: TaskService
   ){}
   ngOnInit(): void {
-    this.createService.editState$.subscribe(edit => {
+    this.taskService.editState.subscribe(edit => {
       this.generalEditState = edit;
     });
   }
-  changeEditState(){
-    const titleControl = this.editedCtrlTask.get('title');
-    const descriptionControl = this.editedCtrlTask.get('description');
-    const deadlineControl = this.editedCtrlTask.get('deadline');
-    const priorityControl = this.editedCtrlTask.get('priority');
-    if (titleControl) titleControl.setValue(this.task.title);
-    if (descriptionControl) descriptionControl.setValue(this.task.description);
-    if (deadlineControl) deadlineControl.setValue(this.task.deadline);
-    if (priorityControl) priorityControl.setValue(this.task.priority);
-    this.createService.changeEditState(this.task.title);
-    this.generalEditState = !this.task.editState;
-    this.previousTitle = this.task.title;
-  }
-  editTask(title: string, editedTask: Task){
-    this.createService.editTask(this.task.title, this.editedTask);
-  }
+
   onSubmit(){
     if(typeof(this.editedCtrlTask.value.title) === "string" 
       && typeof(this.editedCtrlTask.value.description) === "string" 
@@ -64,11 +74,41 @@ export class TaskComponent implements OnInit{
           deadline: this.editedCtrlTask.value.deadline,
           priority: this.editedCtrlTask.value.priority,
           editState: false,
+          createdState: true,
         }
       }
     this.editTask(this.previousTitle, this.editedTask);
     this.editedCtrlTask.reset();
   }
+  
+  changeEditState(){
+    const titleControl = this.editedCtrlTask.get('title');
+    const descriptionControl = this.editedCtrlTask.get('description');
+    const deadlineControl = this.editedCtrlTask.get('deadline');
+    const priorityControl = this.editedCtrlTask.get('priority');
+    if (titleControl) titleControl.setValue(this.task.title);
+    if (descriptionControl) descriptionControl.setValue(this.task.description);
+    if (deadlineControl) deadlineControl.setValue(this.task.deadline);
+    if (priorityControl) priorityControl.setValue(this.task.priority);
+    this.taskService.changeEditState(this.task.title);
+    this.generalEditState = !this.task.editState;
+    this.previousTitle = this.task.title;
+  }
+
+  editTask(title: string, editedTask: Task){
+    this.taskService.editTask(this.task.title, this.editedTask);
+  }
+
+  onDelete(){
+    this.task.createdState = false
+    //this.taskService.deleteTask(this.task.title);
+  }
+  onAnimationDone(event: any){
+    if(this.task.createdState === false){
+      this.taskService.deleteTask(this.task.title);
+    }
+  }
+
   onCancel(){
     this.task.editState = !this.task.editState;
   }

@@ -1,0 +1,47 @@
+<div class="nav-container">
+    <div class="logo-text-container">
+        <a routerLink="" class="logo-container" >
+            <img class="logo" src="../../../assets/logos/logo2.png" alt="logo">
+            <span>
+                TO-DO-LIST
+            </span>
+        </a>
+    </div>
+    @if (profile !== null){
+        <div class="login-container">
+            <span id="user-name">{{profile.name}}</span>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <span class="material-symbols-outlined symbol-person">
+                    person
+                </span>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="redirectProfile()">
+                <div class="menu-item">
+                        <span class="material-symbols-outlined">
+                            person
+                        </span>
+                        <span>
+                            profile
+                        </span>
+                </div>
+              </button>
+              <button mat-menu-item>
+                <div class="menu-item">
+                    <span class="material-symbols-outlined">
+                        logout
+                    </span>
+                    <span>Logout</span>
+                </div>
+              </button>
+            </mat-menu>
+        </div>
+        }@else{
+            <a routerLink="/user/login" class="login-text">
+                <span>
+                    Log-In
+                </span>
+                <img class="icon" src="../../../assets/icons/login-icon.jpg" alt="icon">
+            </a>
+        }
+</div>

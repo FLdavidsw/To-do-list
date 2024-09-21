@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
 
-import { CreateService } from '../../services/create-task.service';
+import { TaskService } from '@services/task.service';
 
-import { Task } from '../../models/task.model';
+import { Task } from '@models/task.model';
 
 @Component({
   selector: 'app-create-task',
@@ -20,7 +20,8 @@ export class CreateTaskComponent implements OnInit{
     description: '',
     deadline: '',
     priority: '',
-    editState: false
+    editState: false,
+    createdState: true,
   };
   newTaskCtrl = new FormGroup({
     title: new FormControl('', {
@@ -34,29 +35,30 @@ export class CreateTaskComponent implements OnInit{
     priority: new FormControl('', {nonNullable: true}),
   })
   constructor (
-    private createService: CreateService
+    private taskService: TaskService
   ) {}
 
   ngOnInit(): void {
     //apply a zip function to make both procedures at the same time
-    this.createService.editState$.subscribe(edit => {
+    this.taskService.editState.subscribe(edit => {
       this.generalEditState = edit;
     });
-    this.createService.createState$.subscribe(create => {
+    this.taskService.createState.subscribe(create => {
       this.addingTask = create;
     });
   }
   changeState(){
     this.addingTask = !this.addingTask;
-    this.createService.changeCreateState();
+    this.taskService.changeCreateStateOpen();
   }
   createTask(){
-    this.createService.addTask({
+    this.taskService.addTask({
       title: this.task.title,
       description: this.task.description,
       deadline: this.task.deadline,
       priority: this.task.priority,
-      editState: false
+      editState: false,
+      createdState: true
     })
   }
   onSubmit(){
@@ -73,8 +75,8 @@ export class CreateTaskComponent implements OnInit{
         }
       }
     this.createTask();
+    this.taskService.changeCreateStateClose();
     this.newTaskCtrl.reset();
-    this.addingTask = !this.addingTask;
   }
   onCancel(){
     this.addingTask = !this.addingTask;
